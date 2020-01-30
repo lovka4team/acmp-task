@@ -1,0 +1,155 @@
+#include<bits/stdc++.h>
+#include<windows.h>
+#include<conio.h>
+#include"drawspace.h"
+using namespace std;
+void draw_endl(int y) {
+	for(int i=0;i<y;++i) {
+		cout<<endl;
+	}
+}
+int draw_menu(int a,int y,int v) {
+	string vr="-  -  -  -  -  -",c;
+	vector<string> stroka;
+	stroka.push_back(vr);
+	stroka.push_back(vr);
+	string x;
+	vr.clear();
+	if(v%2!=0)
+		for(;;) {
+			if(kbhit()!=0){
+	        	x=getch();
+	        	if(x=="\r") {
+	        		system("cls");
+	        		if(v%2==0)
+	        			return 56;
+	        		else
+	        			return 55;
+				}
+				if(x=="s") {
+					v++;
+					return v;
+				}
+				if(x=="w"){
+					v--;
+					return v;
+				}
+	        	continue;
+			}
+			system("cls");
+			draw_endl(y/2-7);
+			for(int i=0;i<16;++i) {
+				if(stroka[0][i]=='-') {
+					stroka[0][i]=' ';
+					stroka[0][i+1]='-';
+					i++;
+				}
+			}
+			for(int i=15;i>=0;--i) {
+				if(stroka[1][i]=='-') {
+					stroka[1][i]=' ';
+					stroka[1][i-1]='-';
+					--i;
+				}
+			}
+			if(stroka[1][14]==' ' && stroka[1][13]==' ')
+				stroka[1][15]='-';
+			if(stroka[0][1]==' ' && stroka[0][2]==' ')
+				stroka[0][0]='-';
+			char el[2];
+			el[0]=' ';
+			el[1]=' ';
+			if(stroka[0][0]==' ' && stroka[0][1]==' ')
+				el[0]='|';
+			if(stroka[1][15]==' ' && stroka[1][14]==' ')
+				el[1]='|';
+			cout<<setw(34);
+			cout<<stroka[0];
+			cout<<endl;
+			cout<<setw(19);
+			cout<<el[0]<<"     new      "<<el[1]<<endl;
+			cout<<setw(34);
+			cout<<stroka[1];
+			draw_endl(2);
+			cout<<setw(34);
+			cout<<"    exit      ";
+			draw_endl(10);
+			Sleep(100);
+		}
+		for(;;) {
+			if(kbhit()!=0){
+	        	x=getch();
+	        	if(x=="\r") {
+	        		system("cls");
+	        		if(v%2==0)
+	        			return 56;
+	        		else
+	        			return 55;
+				}
+				if(x=="s") {
+					v++;
+					return v;
+				}
+				if(x=="w"){
+					v--;
+					return v;
+				}
+	        	continue;
+			}
+			system("cls");
+			draw_endl(y/2-6);
+			for(int i=0;i<16;++i) {
+				if(stroka[0][i]=='-') {
+					stroka[0][i]=' ';
+					stroka[0][i+1]='-';
+					i++;
+				}
+			}
+			for(int i=15;i>=0;--i) {
+				if(stroka[1][i]=='-') {
+					stroka[1][i]=' ';
+					stroka[1][i-1]='-';
+					--i;
+				}
+			}
+			if(stroka[1][14]==' ' && stroka[1][13]==' ')
+				stroka[1][15]='-';
+			if(stroka[0][1]==' ' && stroka[0][2]==' ')
+				stroka[0][0]='-';
+			char el[2];
+			el[0]=' ';
+			el[1]=' ';
+			if(stroka[0][0]==' ' && stroka[0][1]==' ')
+				el[0]='|';
+			if(stroka[1][15]==' ' && stroka[1][14]==' ')
+				el[1]='|';
+			cout<<setw(34);
+			cout<<"    new       ";
+			draw_endl(2);
+			cout<<setw(34);
+			cout<<stroka[0];
+			cout<<endl;
+			cout<<setw(19);
+			cout<<el[0]<<"     exit     "<<el[1]<<endl;
+			cout<<setw(34);
+			cout<<stroka[1];
+			draw_endl(9);
+			Sleep(100);
+		}
+}
+int main() {
+	int x=200,y=25,v;
+	v=1;
+	for(;;) {
+		for(;;) {
+			v=draw_menu(x,y,v);
+			if(v==56)
+				return 0;
+			if(v==55) {
+				cout<<"start_project"<<endl;
+				system("pause");
+				v=1;
+			}
+		}
+	}
+}
